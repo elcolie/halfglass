@@ -16,28 +16,54 @@ def planner_list(request):
 
 def planner_create(request):
     if request.method == 'POST':
-        form = PlannerForm(request.POST or None, request=request)
+        form = PlannerForm(request.POST or None)
         if form.is_valid():
-            comment = request.POST.getlist('comment')
-            scheduler_type = request.POST.getlist('scheduler_type')
-            start_type = request.POST.getlist('start_type')
-            start_time = request.POST.getlist('start_time')
-            stop_time = request.POST.getlist('stop_time')
-            month_list = request.POST.getlist('month_list')
-            week_day = request.POST.getlist('week_day')
-            date_day = request.POST.getlist('date_day')
-            new_record = Planner.objects.create(
-
-            )
-            # import pdb; pdb.set_trace()
-            return HttpResponseRedirect(reverse('list'))
+            comment = request.POST.get('comment')
+            new_record = Planner.objects.create(comment=comment)
+            new_record.save()
+            return HttpResponseRedirect(reverse("planner:list"))
     else:
-        print(request)
         form = PlannerForm()
     context = {
         "form": form
     }
     return render(request, "planner_post.html", context)
+
+#
+# if form.is_valid():
+#     comment = request.POST.get('comment')
+#     scheduler_type = request.POST.get('scheduler_type')
+#     start_type = request.POST.get('start_type')
+#     start_time = request.POST.get('start_time')
+#     stop_time = request.POST.get('stop_time')
+#     month_list = request.POST.getlist('month_list')
+#     week_day = request.POST.getlist('week_day')
+#     date_day = request.POST.getlist('date_day')
+#     stop_type = request.POST.get('stop_type')
+#     lifetime_quantity = request.POST.get('lifetime_quantity')
+#     lifetime_unit = request.POST.get('lifetime_unit')
+#
+#     import pdb;
+#
+#     pdb.set_trace()
+#
+#     lifetime_quantity = int(lifetime_quantity)
+#     lifetime_unit = int(lifetime_unit)
+#     new_record = Planner.objects.create(
+#         comment=comment,
+#         scheduler_type=scheduler_type,
+#         start_type=start_type,
+#         start_time=start_time,
+#         stop_time=stop_time,
+#         month_json=month_list,
+#         weekday_json=week_day,
+#         schedule_days=date_day,
+#         stop_type=stop_type,
+#         lifetime_quantity=lifetime_quantity,
+#         lifetime_unit=lifetime_unit)
+#     new_record.save()
+#
+#     return HttpResponseRedirect(reverse('list'))
 
 
 def planner_detail(request, id=None):

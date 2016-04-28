@@ -70,3 +70,8 @@ STOP_TYPE = (
     (0, _("date/time")),
     (1, _("period"))
 )
+LIFETIME_UNIT = (
+    (0, _("Minutes")),
+    (1, _("Hours")),
+    (2, _("Days")),
+)

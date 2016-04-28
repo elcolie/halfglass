@@ -11,16 +11,6 @@ class PlannerModelForm(forms.ModelForm):
 
 
 class PlannerForm(forms.Form):
-    # BIRTH_YEAR_CHOICES = ('1980', '1981', '1982')
-    # FAVORITE_COLORS_CHOICES = (
-    #     ('blue', 'Blue'),
-    #     ('green', 'Green'),
-    #     ('black', 'Black'),
-    # )
-    # birth_year = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES))
-    # favorite_colors = forms.MultipleChoiceField(required=False,
-    #                                             widget=forms.CheckboxSelectMultiple,
-    #                                             choices=FAVORITE_COLORS_CHOICES)
     comment = forms.CharField(required=False, widget=forms.Textarea(attrs={'placeholder':'Note here'}))
 
     scheduler_type = forms.ChoiceField(required=False, help_text="This field is required", choices=SCHEDULER_TYPE)
@@ -41,13 +31,8 @@ class PlannerForm(forms.Form):
                                         choices=DATA_DAY)
     stop_type = forms.ChoiceField(required=False, choices=STOP_TYPE)
 
-    """http://stackoverflow.com/questions/1057252/how-do-i-access-the-request-object-or-any-other-variable-in-a-forms-clean-met/6062628#6062628"""
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
-        super(PlannerForm, self).__init__(*args, **kwargs)
-
-    def clean(self):
-        return self.request
+    lifetime_quantity = forms.IntegerField(required=False, max_value=32767, min_value=0)
+    lifetime_unit = forms.ChoiceField(required=False, choices=LIFETIME_UNIT)
 
     class Meta:
         model = Planner
