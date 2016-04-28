@@ -1,9 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from planner.forms import PlannerForm
 from .models import Planner
+
 
 def planner_list(request):
     queryset = Planner.objects.all()
@@ -19,7 +20,11 @@ def planner_create(request):
         form = PlannerForm(request.POST or None)
         if form.is_valid():
             comment = request.POST.get('comment')
-            new_record = Planner.objects.create(comment=comment)
+            scheduler_type = request.POST.get('start_type')
+            start_type = request.POST.get('start_type')
+            start_time = request.POST.get('start_time')
+            stop_time = request.POST.get('stop_time')
+            new_record = Planner.objects.create(comment=comment, scheduler_type=scheduler_type, start_type=start_type, start_time=start_time, stop_time=stop_time)
             new_record.save()
             return HttpResponseRedirect(reverse("planner:list"))
     else:
@@ -66,8 +71,13 @@ def planner_create(request):
 #     return HttpResponseRedirect(reverse('list'))
 
 
-def planner_detail(request, id=None):
-    return HttpResponse("Get")
+def planner_detail(request, id):
+    instance = get_object_or_404(Planner, id=id)
+    context = {
+        "title": instance.comment,
+        "instance": instance,
+    }
+    return render(request, "planner_detail.html", context)
 
 
 def planner_update(request, id=None):
