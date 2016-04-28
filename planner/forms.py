@@ -3,7 +3,6 @@ from django import forms
 from .models import Planner
 from planner.scheduler_type import *
 
-
 class PlannerModelForm(forms.ModelForm):
     class Meta:
         model = Planner

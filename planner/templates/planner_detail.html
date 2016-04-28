@@ -3,23 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <h1>Comment : {{ instance.comment }}</h1>
-    Scheduler type : {{ instance.scheduler_type }}<br>
-    Scheduler start type: {{ instance.start_type }}<br>
-    Start Time : {% if instance.start_time %}{{ instance.start_time }}{% endif %}<br>
-    Stop Time : {% if instance.stop_time %}{{ instance.stop_time }}{% endif %}<br>
-
-    Months : {% if instance.month_json %}{{ instance.month_json }}{% endif %}<br>
-    Week Days : {% if instance.weekday_json %}{{ instance.weekday_json }}{% endif %}<br>
-{#    Stop Time : {% if instance.start_time %}{{ instance.stop_time }}{% endif %}#}
-{#    Stop Time : {% if instance.start_time %}{{ instance.stop_time }}{% endif %}#}
-{#    Stop Time : {% if instance.start_time %}{{ instance.stop_time }}{% endif %}#}
-{#    Stop Time : {% if instance.start_time %}{{ instance.stop_time }}{% endif %}#}
-
-{#    schedule_days = JSONField(null=True, blank=True)     # 1, 11, 21, 31#}
-{#    stop_type = models.PositiveSmallIntegerField(choices=STOP_TYPE, default=0)#}
-{#    lifetime_quantity = models.PositiveSmallIntegerField(default=0)#}
-{#    lifetime_unit = models.PositiveSmallIntegerField(choices=LIFETIME_UNIT, default=0)#}
-
+    scheduler type : {{ instance.scheduler_type }}<br>
+    start type : {{ instance.start_type }}<br>
+    month list : {{ instance.month_json }}<br>
+    week day : {{ instance.weekday_json }}<br>
+    date : {{ instance.schedule_days }}<br>
+    start_time : {{ instance.start_time|time:"H:i" }}<br>
+    stop_time : {{ instance.stop_time|time:"H:i" }}<br>
+    stop_type : {{ instance.stop_type }}<br>
+    lifetime quantity : {{ instance.lifetime_quantity }}<br>
+    lifetime unit : {{ instance.lifetime_unit }}<br>
 </head>
 <body>
 

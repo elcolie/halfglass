@@ -51,42 +51,6 @@ def planner_create(request):
     }
     return render(request, "planner_post.html", context)
 
-#
-# if form.is_valid():
-#     comment = request.POST.get('comment')
-#     scheduler_type = request.POST.get('scheduler_type')
-#     start_type = request.POST.get('start_type')
-#     start_time = request.POST.get('start_time')
-#     stop_time = request.POST.get('stop_time')
-#     month_list = request.POST.getlist('month_list')
-#     week_day = request.POST.getlist('week_day')
-#     date_day = request.POST.getlist('date_day')
-#     stop_type = request.POST.get('stop_type')
-#     lifetime_quantity = request.POST.get('lifetime_quantity')
-#     lifetime_unit = request.POST.get('lifetime_unit')
-#
-#     import pdb;
-#
-#     pdb.set_trace()
-#
-#     lifetime_quantity = int(lifetime_quantity)
-#     lifetime_unit = int(lifetime_unit)
-#     new_record = Planner.objects.create(
-#         comment=comment,
-#         scheduler_type=scheduler_type,
-#         start_type=start_type,
-#         start_time=start_time,
-#         stop_time=stop_time,
-#         month_json=month_list,
-#         weekday_json=week_day,
-#         schedule_days=date_day,
-#         stop_type=stop_type,
-#         lifetime_quantity=lifetime_quantity,
-#         lifetime_unit=lifetime_unit)
-#     new_record.save()
-#
-#     return HttpResponseRedirect(reverse('list'))
-
 
 def planner_detail(request, id):
     instance = get_object_or_404(Planner, id=id)
@@ -94,6 +58,7 @@ def planner_detail(request, id):
         "title": instance.comment,
         "instance": instance,
     }
+    # import pdb; pdb.set_trace()
     return render(request, "planner_detail.html", context)
 
 
