@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
 
 from planner.forms import PlannerForm
@@ -14,16 +15,28 @@ def planner_list(request):
 
 
 def planner_create(request):
-    form = PlannerForm(request.POST or None, request=request)
-    months_list = request.POST.getlist('month')   # Ex: ['Jan', 'Mar', 'Dec']
+    if request.method == 'POST':
+        form = PlannerForm(request.POST or None, request=request)
+        if form.is_valid():
+            comment = request.POST.getlist('comment')
+            scheduler_type = request.POST.getlist('scheduler_type')
+            start_type = request.POST.getlist('start_type')
+            start_time = request.POST.getlist('start_time')
+            stop_time = request.POST.getlist('stop_time')
+            month_list = request.POST.getlist('month_list')
+            week_day = request.POST.getlist('week_day')
+            date_day = request.POST.getlist('date_day')
+            new_record = Planner.objects.create(
 
-    # Preparing JSONField datatype for saving
-    temp_dict = {}
-    for i in months_list:
-        # Intentionally use this format because query is easier than store list.
-        temp_dict[i] = True
-    # import pdb; pdb.set_trace()
-    context = { "form" : form }
+            )
+            # import pdb; pdb.set_trace()
+            return HttpResponseRedirect(reverse('list'))
+    else:
+        print(request)
+        form = PlannerForm()
+    context = {
+        "form": form
+    }
     return render(request, "planner_post.html", context)
 
 

@@ -7,7 +7,6 @@ from planner.scheduler_type import SCHEDULER_TYPE, START_TYPE
 
 
 class Planner(models.Model):
-    name = models.CharField(max_length=200)
     comment = models.TextField()
 
     scheduler_type = models.PositiveSmallIntegerField(
@@ -15,8 +14,8 @@ class Planner(models.Model):
     start_type = models.PositiveSmallIntegerField(
         choices=START_TYPE, default=0)
 
-    start_time = models.TimeField(null=True, blank=True)
-    stop_time = models.TimeField(null=True, blank=True)
+    start_time = models.TimeField(null=True, blank=True, help_text="start time")
+    stop_time = models.TimeField(null=True, blank=True, help_text="stop time")
 
     month_json = JSONField(null=True, blank=True)    # Jan, Feb, Mar, ...
     weekday_json = JSONField(null=True, blank=True)    # Mon, Tue, Wed, ...
