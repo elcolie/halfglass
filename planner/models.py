@@ -3,7 +3,7 @@ from django.contrib.postgres.fields import JSONField
 
 
 # http://stackoverflow.com/questions/24403075/django-choicefield
-from planner.scheduler_type import SCHEDULER_TYPE, START_TYPE
+from planner.scheduler_type import SCHEDULER_TYPE, START_TYPE, STOP_TYPE
 
 
 class Planner(models.Model):
@@ -19,7 +19,9 @@ class Planner(models.Model):
 
     month_json = JSONField(null=True, blank=True)    # Jan, Feb, Mar, ...
     weekday_json = JSONField(null=True, blank=True)    # Mon, Tue, Wed, ...
-    date_json = JSONField(null=True, blank=True)     # 1, 11, 21, 31
+    schedule_days = JSONField(null=True, blank=True)     # 1, 11, 21, 31
+
+    stop_type = models.PositiveSmallIntegerField(choices=STOP_TYPE, default=0)
 
     def __str__(self):
         return self.name

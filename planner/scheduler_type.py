@@ -66,3 +66,7 @@ DATA_DAY = (
     (30, 30),
     (31, 31),
 )
+STOP_TYPE = (
+    (0, _("date/time")),
+    (1, _("period"))
+)
