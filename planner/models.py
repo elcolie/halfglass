@@ -20,9 +20,9 @@ class Planner(models.Model):
     month_json = JSONField(null=True, blank=True)    # Jan, Feb, Mar, ...
     weekday_json = JSONField(null=True, blank=True)    # Mon, Tue, Wed, ...
     schedule_days = JSONField(null=True, blank=True)     # 1, 11, 21, 31
-    stop_type = models.PositiveSmallIntegerField(choices=STOP_TYPE, default=0)
-    lifetime_quantity = models.PositiveSmallIntegerField(default=0)
-    lifetime_unit = models.PositiveSmallIntegerField(choices=LIFETIME_UNIT, default=0)
+    stop_type = models.PositiveSmallIntegerField(null=True, blank=True, choices=STOP_TYPE, default=0)
+    lifetime_quantity = models.PositiveSmallIntegerField(null=True, blank=True)
+    lifetime_unit = models.PositiveSmallIntegerField(null=True, blank=True, choices=LIFETIME_UNIT, default=0)
 
     def __str__(self):
         return self.comment

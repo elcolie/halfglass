@@ -7,7 +7,7 @@ from .models import Planner
 
 
 def planner_list(request):
-    queryset = Planner.objects.all()
+    queryset = Planner.objects.all().order_by('-id')
     context = {
         "title" : "List",
         "object_list" : queryset
@@ -29,7 +29,12 @@ def planner_create(request):
             stop_time = request.POST.get('stop_time')
             stop_type = request.POST.get('stop_type')
             lifetime_quantity = request.POST.get('lifetime_quantity')
-            lifetime_unit = request.POST.get('lifetime_unit')
+            lifetime_unit = float(request.POST.get('lifetime_unit')) # If use int -> ValueError: invalid literal for int() with base 10: ''
+            # import pdb; pdb.set_trace()
+            if start_time == '':
+                start_time = "00:00"
+            if stop_time == '':
+                stop_time = None
             new_record = Planner.objects.create(comment=comment,
                                                 scheduler_type=scheduler_type,
                                                 start_type=start_type,
@@ -58,7 +63,6 @@ def planner_detail(request, id):
         "title": instance.comment,
         "instance": instance,
     }
-    # import pdb; pdb.set_trace()
     return render(request, "planner_detail.html", context)
 
 

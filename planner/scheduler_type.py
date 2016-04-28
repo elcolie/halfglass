@@ -74,4 +74,8 @@ LIFETIME_UNIT = (
     (0, _("Minutes")),
     (1, _("Hours")),
     (2, _("Days")),
+    (3, _("Weeks")),
+    (4, _("Months")),
+    (5, _("Years")),
+    (99, _("Forever")),
 )

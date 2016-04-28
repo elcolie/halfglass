@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <title>{{ title }}</title>
     {% for obj in object_list %}
-        <h1>comment : {{ obj.comment }}<br></h1>
-        scheduler type : {{ obj.scheduler_type }}<br>
-        start type : {{ obj.start_type }}<br>
-        month list : {{ obj.month_list }}<br>
-        week day : {{ obj.week_day }}<br>
-        date : {{ obj.date_day }}<br>
-        start_time : {{ obj.start_time|time:"H:i" }}<br>
-        stop_time : {{ obj.stop_time|time:"H:i" }}<br>
-        stop_type : {{ obj.stop_type }}<br>
-        lifetime quantity : {{ obj.lifetime_quantity }}<br>
-        lifetime unit : {{ obj.lifetime_unit }}<br>
-    {% endfor %}
+    <h1>Comment : {{ obj.comment }}</h1>
+    scheduler type : {{ obj.scheduler_type }}<br>
+    start type : {{ obj.start_type }}<br>
+    month list : {{ obj.month_json }}<br>
+    week day : {{ obj.weekday_json }}<br>
+    date : {{ obj.schedule_days }}<br>
+    start_time : {{ obj.start_time|time:"H:i" }}<br>
+    stop_time : {{ obj.stop_time|time:"H:i" }}<br>
+    stop_type : {{ obj.stop_type }}<br>
+    lifetime quantity : {{ obj.lifetime_quantity }}<br>
+    lifetime unit : {{ obj.lifetime_unit }}<br>    {% endfor %}
 </head>
 <body>
 
