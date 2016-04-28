@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import Planner
+from planner.scheduler_type import SCHEDULER_TYPE, START_TYPE
 
 
 class PlannerModelForm(forms.ModelForm):
@@ -17,7 +18,10 @@ class PlannerForm(forms.Form):
     )
     birth_year = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES))
     favorite_colors = forms.MultipleChoiceField(required=False,
-                                                widget=forms.CheckboxSelectMultiple, choices=FAVORITE_COLORS_CHOICES)
+                                                widget=forms.CheckboxSelectMultiple,
+                                                choices=FAVORITE_COLORS_CHOICES)
+    scheduler_type = forms.ChoiceField(required=True, help_text="This field is required", choices=SCHEDULER_TYPE)
+
     """http://stackoverflow.com/questions/1057252/how-do-i-access-the-request-object-or-any-other-variable-in-a-forms-clean-met/6062628#6062628"""
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)

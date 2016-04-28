@@ -15,17 +15,16 @@ def planner_list(request):
 
 def planner_create(request):
     form = PlannerForm(request.POST or None, request=request)
-    print(request)
-    month = request.POST
-    print(month)
-    import pdb; pdb.set_trace()
+    months_list = request.POST.getlist('month')   # Ex: ['Jan', 'Mar', 'Dec']
 
-    # if form.is_valid():
-    #     instance = form.save(commit=False)
-    #     instance.save()
-    # else:
-    #     return HttpResponse("Invalid Submitted Form")
-    return render(request, "planner_post.html")
+    # Preparing JSONField datatype for saving
+    temp_dict = {}
+    for i in months_list:
+        # Intentionally use this format because query is easier than store list.
+        temp_dict[i] = True
+    # import pdb; pdb.set_trace()
+    context = { "form" : form }
+    return render(request, "planner_post.html", context)
 
 
 def planner_detail(request, id=None):
